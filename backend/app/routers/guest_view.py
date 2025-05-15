@@ -12,13 +12,13 @@ def guest_view(token: str, db: Session = Depends(get_db)):
     if not guest:
         raise HTTPException(status_code=404, detail="Guest not found")
 
-    website = guest.wedding
+    website = guest.website
     if not website:
         raise HTTPException(status_code=404, detail="Wedding website not found")
 
     # Customize view based on group
     group = guest.group
-    story = website.story if group in ["family", "friends"] else None
+    story = website.story if group in ["Family", "Friends"] else None
 
     return schemas.GuestView(
         guest_name=guest.name,
