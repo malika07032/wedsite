@@ -54,7 +54,10 @@ class Guest(Base):
     group = Column(SqlEnum(GuestGroupEnum), nullable=True)
     token = Column(String, unique=True, default=lambda: str(uuid.uuid4()), nullable=False)
     rsvp_status = Column(SqlEnum(RSVPStatusEnum), default=RSVPStatusEnum.pending, nullable=False)
+    attending = Column(SqlEnum(RSVPStatusEnum), default=RSVPStatusEnum.pending, nullable=False)
+    meal_preference = Column(String, nullable=True)
+    notes = Column(String, nullable=True)
+
     wedding_id = Column(Integer, ForeignKey("wedding_websites.id"), nullable=False)
-    
     website = relationship("WeddingWebsite", back_populates="guests")
 

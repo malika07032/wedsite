@@ -89,3 +89,10 @@ class GuestView(BaseModel):
     class Config:
         orm_mode = True
 
+#########################
+# RSVP
+#########################
+class RSVPSubmission(BaseModel):
+    attending: RSVPStatusEnum
+    meal_preference: Optional[str] = None
+    notes: Optional[str] = None

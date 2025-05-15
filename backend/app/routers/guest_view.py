@@ -28,3 +28,23 @@ def guest_view(token: str, db: Session = Depends(get_db)):
         location=website.location,
         story=story
     )
+
+@router.post("/guest-view/{token}/rsvp", response_model=schemas.GuestOut)
+def submit_rsvp(
+    token: str,
+    rsvp_data: schemas.RSVPSubmission,
+    db: Session = Depends(get_db)
+):
+    guest = crud.get_guest_by_token(db, token=token)
+    if not guest:
+        raise HTTPException(status_code=404, detail="Guest not found")
+
+    # Update guest RSVP info
+    guest.attending = rsvp_data.attending
+    guest.meal_preference = rsvp_data.meal_preference
+    guest.notes = rsvp_data.notes
+    guest.rsvp_status = rsvp_data.attending
+
+    db.commit()
+    db.refresh(guest)
+    return guest
