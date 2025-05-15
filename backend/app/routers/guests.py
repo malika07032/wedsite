@@ -28,6 +28,17 @@ def list_guests(
     return crud.get_guests_by_wedding(db, wedding_id=wedding.id)
 
 
+@router.get("/me/rsvps", response_model=list[schemas.GuestOut])
+def get_rsvps(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(dependencies.get_current_user)
+):
+    wedding = crud.get_website_by_user(db, current_user.id)
+    if not wedding:
+        raise HTTPException(status_code=404, detail="Wedding website not found")
+    return crud.get_rsvps_by_wedding(db, wedding.id)
+
+
 @router.get("/guests/{token}", response_model=schemas.GuestOut)
 def view_guest_by_token(
     token: str,

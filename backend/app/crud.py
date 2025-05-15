@@ -42,3 +42,11 @@ def get_guests_by_wedding(db: Session, wedding_id: int):
 
 def get_guest_by_token(db: Session, token: str):
     return db.query(models.Guest).filter(models.Guest.token == token).first()
+
+
+#########################
+# RSVPs
+#########################
+
+def get_rsvps_by_wedding(db: Session, wedding_id: int):
+    return db.query(models.Guest).filter(models.Guest.wedding_id == wedding_id).all()
