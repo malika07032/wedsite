@@ -74,3 +74,18 @@ class GuestOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+#########################
+# Guest View
+#########################
+class GuestView(BaseModel):
+    guest_name: str
+    group: GuestGroupEnum
+    title: str
+    date: datetime
+    location: str
+    story: Optional[str]  # Optional in case you want to hide it from some groups
+
+    class Config:
+        orm_mode = True
+

@@ -6,7 +6,7 @@ from . import models, schemas, crud, auth
 from .database import engine
 from .dependencies import get_db
 
-from app.routers import wedding_website, guests
+from app.routers import wedding_website, guests, guest_view
 
 
 models.Base.metadata.create_all(bind=engine)
@@ -15,6 +15,7 @@ app = FastAPI()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 app.include_router(wedding_website.router)
 app.include_router(guests.router)
+app.include_router(guest_view.router)
 
 @app.get("/")
 async def root():
