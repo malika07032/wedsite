@@ -1,8 +1,8 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from './pages/auth/LoginPage';
-import RegisterPage from './pages/auth/RegisterPage';
-import WeddingWebsitePage from './pages/wedSite/WeddingWebsitePage';
-import DashboardPage from './pages/DashboardPage';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
+import WeddingWebsitePage from "./pages/wedSite/WeddingWebsitePage";
+import DashboardPage from "./pages/DashboardPage";
 
 export default function App() {
   return (

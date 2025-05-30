@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 const API = axios.create({
-  baseURL: 'http://localhost:8000', // Update with your backend URL
+  baseURL: "http://localhost:8000", // Update with your backend URL
 });
 
 API.interceptors.request.use((config) => {
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem("accessToken");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import API from '../../api/axios';
+import React, { useState } from "react";
+import API from "../../api/axios";
 
 const WeddingForm = ({ onCreated }) => {
   const [form, setForm] = useState({
@@ -33,7 +33,10 @@ const WeddingForm = ({ onCreated }) => {
       const response = await API.post("/me/website", payload);
       onCreated(response.data); // Pass new website data to parent
     } catch (err) {
-      if (err.response?.status === 400 && err.response.data?.detail === "Website already exists for this user.") {
+      if (
+        err.response?.status === 400 &&
+        err.response.data?.detail === "Website already exists for this user."
+      ) {
         setError("You have already created a wedding website.");
       } else {
         setError("Failed to create website. Please try again.");
@@ -42,8 +45,13 @@ const WeddingForm = ({ onCreated }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white rounded shadow">
-      <h2 className="text-xl font-semibold mb-4">Create Your Wedding Website</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-md mx-auto p-4 bg-white rounded shadow"
+    >
+      <h2 className="text-xl font-semibold mb-4">
+        Create Your Wedding Website
+      </h2>
 
       {error && <p className="text-red-500 mb-2">{error}</p>}
 

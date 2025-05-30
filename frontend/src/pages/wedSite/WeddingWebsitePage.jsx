@@ -16,11 +16,9 @@ const WeddingWebsitePage = () => {
       if (err.response?.status === 404) {
         // No website created yet — show form
         setWebsite(null);
-      } 
-      else if (err.response?.status === 401) {
+      } else if (err.response?.status === 401) {
         setError("You're unauthorized");
-      }
-      else {
+      } else {
         setError("Failed to load your wedding website.");
       }
     } finally {
