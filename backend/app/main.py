@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
+from fastapi.middleware.cors import CORSMiddleware
 
 from . import models, schemas, crud, auth
 from .database import engine
@@ -16,6 +17,19 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 app.include_router(wedding_website.router)
 app.include_router(guests.router)
 app.include_router(guest_view.router)
+
+# Allow frontend origin
+origins = [
+    "http://localhost:3000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():
