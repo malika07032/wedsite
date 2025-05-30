@@ -47,6 +47,7 @@ const WeddingWebsitePage = () => {
             mode="edit"
             initialValues={website}
             onCreated={handleEditSubmit}
+            onCancel={() => setEditing(false)}
           />
         ) : (
           <WeddingDisplay

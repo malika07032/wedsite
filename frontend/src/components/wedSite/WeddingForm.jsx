@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import API from "../../api/axios";
 
-const WeddingForm = ({ onCreated, initialValues = null, mode = "create" }) => {
+const WeddingForm = ({ onCreated, onCancel, initialValues = null, mode = "create" }) => {
   const [form, setForm] = useState({
     title: initialValues?.title || "",
     date: initialValues?.date?.split("T")[0] || "",
@@ -108,12 +108,25 @@ const WeddingForm = ({ onCreated, initialValues = null, mode = "create" }) => {
         />
       </div>
 
-      <button
-        type="submit"
-        className="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700 transition"
-      >
-        {mode === "edit" ? "Save Changes" : "Create Dashboard"}
-      </button>
+      <div className="flex justify-between gap-4 mt-4">
+        <button
+          type="submit"
+          className="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700 transition"
+        >
+          {mode === "edit" ? "Save Changes" : "Create Dashboard"}
+        </button>
+
+        {mode === "edit" && onCancel && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="flex-1 bg-gray-300 text-gray-700 py-2 rounded hover:bg-gray-400 transition"
+          >
+            Cancel
+          </button>
+        )}
+      </div>
+      
     </form>
   );
 };
