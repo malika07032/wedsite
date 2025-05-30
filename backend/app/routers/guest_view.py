@@ -26,14 +26,13 @@ def guest_view(token: str, db: Session = Depends(get_db)):
         title=website.title,
         date=website.date,
         location=website.location,
-        story=story
+        story=story,
     )
+
 
 @router.post("/guest-view/{token}/rsvp", response_model=schemas.GuestOut)
 def submit_rsvp(
-    token: str,
-    rsvp_data: schemas.RSVPSubmission,
-    db: Session = Depends(get_db)
+    token: str, rsvp_data: schemas.RSVPSubmission, db: Session = Depends(get_db)
 ):
     guest = crud.get_guest_by_token(db, token=token)
     if not guest:

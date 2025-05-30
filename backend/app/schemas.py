@@ -3,19 +3,24 @@ from datetime import datetime
 from typing import Optional
 from .models import RSVPStatusEnum, GuestGroupEnum
 
+
 #########################
 # User
 #########################
 class UserBase(BaseModel):
     email: EmailStr
 
+
 class UserCreate(UserBase):
     password: str
 
+
 class UserOut(UserBase):
     id: int
+
     class Config:
         orm_mode = True
+
 
 #########################
 # Token
@@ -24,8 +29,10 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
+
 class TokenData(BaseModel):
     email: str | None = None
+
 
 #########################
 # Wedding Website
@@ -36,11 +43,13 @@ class WeddingWebsiteCreate(BaseModel):
     location: str
     story: str
 
+
 class WeddingWebsiteUpdate(BaseModel):
     title: Optional[str] = None
     date: Optional[datetime] = None
     location: Optional[str] = None
     story: Optional[str] = None
+
 
 class WeddingWebsiteOut(BaseModel):
     id: int
@@ -54,6 +63,7 @@ class WeddingWebsiteOut(BaseModel):
     class Config:
         orm_mode = True
 
+
 #########################
 # Guests
 #########################
@@ -62,6 +72,7 @@ class GuestCreate(BaseModel):
     email: Optional[str] = None
     group: Optional[GuestGroupEnum] = None
     rsvp_status: Optional[RSVPStatusEnum] = RSVPStatusEnum.pending
+
 
 class GuestOut(BaseModel):
     id: int
@@ -73,6 +84,7 @@ class GuestOut(BaseModel):
 
     class Config:
         orm_mode = True
+
 
 #########################
 # Guest View
@@ -87,6 +99,7 @@ class GuestView(BaseModel):
 
     class Config:
         orm_mode = True
+
 
 #########################
 # RSVP
