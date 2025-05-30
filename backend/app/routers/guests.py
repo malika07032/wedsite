@@ -34,6 +34,23 @@ def update_guest(
     return crud.update_guest(db, guest_id=guest_id, guest_data=guest_update)
 
 
+@router.delete("/me/guests/{guest_id}", status_code=204)
+def delete_guest(
+    guest_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(dependencies.get_current_user),
+):
+    wedding = crud.get_website_by_user(db, current_user.id)
+    if not wedding:
+        raise HTTPException(status_code=404, detail="Wedding website not found")
+    guest = crud.get_guest_by_id(db, guest_id)
+    if not guest or guest.wedding_id != wedding.id:
+        raise HTTPException(status_code=404, detail="Guest not found")
+    db.delete(guest)
+    db.commit()
+    return
+
+
 @router.get("/me/guests", response_model=list[schemas.GuestOut])
 def list_guests(
     db: Session = Depends(get_db),

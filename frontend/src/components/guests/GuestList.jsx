@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import API from "../../api/axios";
 import GuestForm from "./GuestForm";
 
-const GuestList = () => {
+const GuestList = ({onError}) => {
   const [guests, setGuests] = useState([]);
   const [editingGuest, setEditingGuest] = useState(null);
 
@@ -12,6 +12,13 @@ const GuestList = () => {
       setGuests(res.data);
     } catch (err) {
       console.error("Failed to load guests", err);
+      if (onError) {
+        if (err.response?.status === 401) {
+          onError("You are not authorized. Please log in.");
+        } else {
+          onError("Failed to load guests. Please try again later.");
+        }
+      }
     }
   };
 
@@ -21,6 +28,17 @@ const GuestList = () => {
 
   const handleEdit = (guest) => setEditingGuest(guest);
   const handleCancel = () => setEditingGuest(null);
+
+  const handleDelete = async (guestId) => {
+    const confirm = window.confirm("Are you sure you want to delete this guest?");
+    if (!confirm) return;
+    try {
+      await API.delete(`/me/guests/${guestId}`);
+      setGuests((prev) => prev.filter((g) => g.id !== guestId));
+    } catch (err) {
+      console.error("Error deleting guest", err);
+    }
+  };
 
   const handleSubmit = () => {
     fetchGuests();
@@ -59,11 +77,19 @@ const GuestList = () => {
                 Guest Link: /guest-view/{guest.token}
               </p>
             </div>
+
             <button
               onClick={() => handleEdit(guest)}
               className="bg-blue-600 text-white px-3 py-1 rounded h-fit"
             >
               Edit
+            </button>
+
+            <button
+              onClick={() => handleDelete(guest.id)}
+              className="bg-blue-600 text-white px-3 py-1 rounded h-fit"
+            >
+              Delete
             </button>
           </li>
         ))}
