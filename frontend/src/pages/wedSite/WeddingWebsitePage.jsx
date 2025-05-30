@@ -6,6 +6,7 @@ import WeddingDisplay from "../../components/wedSite/WeddingDisplay";
 const WeddingWebsitePage = () => {
   const [website, setWebsite] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
 
   const fetchWebsite = async () => {
@@ -33,10 +34,26 @@ const WeddingWebsitePage = () => {
   if (loading) return <p className="text-center mt-10">Loading...</p>;
   if (error) return <p className="text-red-500 text-center mt-10">{error}</p>;
 
+  const handleEditSubmit = (updated) => {
+    setWebsite(updated);
+    setEditing(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       {website ? (
-        <WeddingDisplay website={website} />
+        editing ? (
+          <WeddingForm
+            mode="edit"
+            initialValues={website}
+            onCreated={handleEditSubmit}
+          />
+        ) : (
+          <WeddingDisplay
+            website={website}
+            onEditClick={() => setEditing(true)}
+          />
+        )
       ) : (
         <WeddingForm onCreated={setWebsite} />
       )}

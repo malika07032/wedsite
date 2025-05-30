@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import API from "../../api/axios";
 
-const WeddingForm = ({ onCreated }) => {
+const WeddingForm = ({ onCreated, initialValues = null, mode = "create" }) => {
   const [form, setForm] = useState({
-    title: "",
-    date: "",
-    location: "",
-    story: "",
+    title: initialValues?.title || "",
+    date: initialValues?.date?.split("T")[0] || "",
+    location: initialValues?.location || "",
+    story: initialValues?.story || "",
   });
 
   const [error, setError] = useState("");
@@ -30,7 +30,10 @@ const WeddingForm = ({ onCreated }) => {
         date: `${form.date}T00:00:00`, // append dummy time
       };
 
-      const response = await API.post("/me/website", payload);
+      const url = "/me/website";
+      const method = mode === "edit" ? API.put : API.post;
+      const response = await method(url, payload);
+
       onCreated(response.data); // Pass new website data to parent
     } catch (err) {
       if (
@@ -50,7 +53,9 @@ const WeddingForm = ({ onCreated }) => {
       className="max-w-md mx-auto p-4 bg-white rounded shadow"
     >
       <h2 className="text-xl font-semibold mb-4">
-        Create Your Wedding Website
+        {mode === "edit"
+          ? "Update Your Wedding Info"
+          : "Create Your Wedding Dashboard"}
       </h2>
 
       {error && <p className="text-red-500 mb-2">{error}</p>}
@@ -107,7 +112,7 @@ const WeddingForm = ({ onCreated }) => {
         type="submit"
         className="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700 transition"
       >
-        Create Website
+        {mode === "edit" ? "Save Changes" : "Create Dashboard"}
       </button>
     </form>
   );
