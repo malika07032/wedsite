@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthForm from '../components/AuthForm';
-import API from '../api/axios';
+import AuthForm from '../../components/auth/AuthForm';
+import API from '../../api/axios';
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -19,6 +19,6 @@ export default function RegisterPage() {
       alert(err.response?.data?.detail || 'Registration failed');
     }
   };
-  
+
   return <AuthForm onSubmit={handleRegister} type="register" />;
 }

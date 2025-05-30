@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import AuthForm from '../components/AuthForm';
-import API from '../api/axios';
+import AuthForm from '../../components/auth/AuthForm';
+import API from '../../api/axios';
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -17,12 +17,12 @@ export default function LoginPage() {
                 },
             });
 
-            localStorage.setItem('token', data.access_token);
+            localStorage.setItem('accessToken', data.access_token);
             navigate('/me');
         } catch (err) {
             alert('Login failed: ' + err.response?.data?.detail || 'Unknown error');
         }
     };
-    
+
     return <AuthForm onSubmit={handleLogin} type="login" />;
 }
