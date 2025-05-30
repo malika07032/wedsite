@@ -7,7 +7,6 @@ from .models import RSVPStatusEnum, GuestGroupEnum
 # User
 #########################
 class UserBase(BaseModel):
-    username: str
     email: EmailStr
 
 class UserCreate(UserBase):

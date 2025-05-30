@@ -6,9 +6,7 @@ export default function LoginPage() {
     const navigate = useNavigate();
     
     const handleLogin = async ({ email, password }) => {
-
         try {
-            console.log('Login handler called', { email, password });
             const formData = new URLSearchParams();
             formData.append('username', email); // Backend expects "username"
             formData.append('password', password);
@@ -20,12 +18,11 @@ export default function LoginPage() {
             });
 
             localStorage.setItem('token', data.access_token);
-            //navigate('/dashboard');
-            console.log("you're logged in")
+            navigate('/me');
         } catch (err) {
             alert('Login failed: ' + err.response?.data?.detail || 'Unknown error');
         }
     };
-
+    
     return <AuthForm onSubmit={handleLogin} type="login" />;
 }

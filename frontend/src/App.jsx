@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
-// import RegisterPage from './pages/RegisterPage';
+import RegisterPage from './pages/RegisterPage';
+import DashboardPage from './pages/DashboardPage';
 
 export default function App() {
   return (
@@ -8,7 +9,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<LoginPage />} />
-        {/* <Route path="/register" element={<RegisterPage />} /> */}
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/me" element={<DashboardPage />} />
         {/* You can add /dashboard and other routes later */}
       </Routes>
     </BrowserRouter>
