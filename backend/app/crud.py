@@ -44,6 +44,18 @@ def add_guest(db: Session, wedding_id: int, guest_data: schemas.GuestCreate):
     return guest
 
 
+def update_guest(db: Session, guest_id: int, guest_data: schemas.GuestUpdate):
+    guest = db.query(models.Guest).filter(models.Guest.id == guest_id).first()
+    if not guest:
+        return None
+    update_data = guest_data.dict(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(guest, key, value)
+    db.commit()
+    db.refresh(guest)
+    return guest
+
+
 def get_guests_by_wedding(db: Session, wedding_id: int):
     return db.query(models.Guest).filter(models.Guest.wedding_id == wedding_id).all()
 
@@ -51,6 +63,9 @@ def get_guests_by_wedding(db: Session, wedding_id: int):
 def get_guest_by_token(db: Session, token: str):
     return db.query(models.Guest).filter(models.Guest.token == token).first()
 
+
+def get_guest_by_id(db: Session, guest_id: int):
+    return db.query(models.Guest).filter(models.Guest.id == guest_id).first()
 
 #########################
 # RSVPs

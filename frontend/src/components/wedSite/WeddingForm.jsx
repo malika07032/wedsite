@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import API from "../../api/axios";
 
-const WeddingForm = ({ onCreated, onCancel, initialValues = null, mode = "create" }) => {
+const WeddingForm = ({
+  onCreated,
+  onCancel,
+  initialValues = null,
+  mode = "create",
+}) => {
   const [form, setForm] = useState({
     title: initialValues?.title || "",
     date: initialValues?.date?.split("T")[0] || "",
@@ -126,7 +131,6 @@ const WeddingForm = ({ onCreated, onCancel, initialValues = null, mode = "create
           </button>
         )}
       </div>
-      
     </form>
   );
 };

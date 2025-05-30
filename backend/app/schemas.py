@@ -74,6 +74,13 @@ class GuestCreate(BaseModel):
     rsvp_status: Optional[RSVPStatusEnum] = RSVPStatusEnum.pending
 
 
+class GuestUpdate(BaseModel):
+    name: Optional[str] = None
+    email: Optional[str] = None
+    group: Optional[GuestGroupEnum] = None
+    rsvp_status: Optional[RSVPStatusEnum] = None
+
+
 class GuestOut(BaseModel):
     id: int
     name: str
