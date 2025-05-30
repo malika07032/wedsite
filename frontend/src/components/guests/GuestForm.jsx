@@ -37,7 +37,7 @@ const GuestForm = ({
       if (mode === "edit" && initialValues?.id) {
         response = await API.put(`/me/guests/${initialValues.id}`, payload);
       } else {
-        console.log(payload)
+        console.log(payload);
         response = await API.post("/me/guests", payload);
       }
 

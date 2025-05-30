@@ -50,7 +50,9 @@ const GuestList = () => {
           >
             <div>
               <p className="font-semibold">{guest.name}</p>
-              <p className="text-sm text-gray-600">{guest.email || "No email"}</p>
+              <p className="text-sm text-gray-600">
+                {guest.email || "No email"}
+              </p>
               <p className="text-sm">Group: {guest.group || "None"}</p>
               <p className="text-sm">RSVP: {guest.rsvp_status}</p>
               <p className="text-xs text-gray-500 break-all">
