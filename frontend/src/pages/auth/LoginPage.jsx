@@ -18,7 +18,7 @@ export default function LoginPage() {
       });
 
       localStorage.setItem("accessToken", data.access_token);
-      navigate("/me");
+      navigate("/wedding");
     } catch (err) {
       alert("Login failed: " + err.response?.data?.detail || "Unknown error");
     }

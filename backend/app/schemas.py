@@ -99,6 +99,7 @@ class GuestOut(BaseModel):
 class GuestView(BaseModel):
     guest_name: str
     group: GuestGroupEnum
+    rsvp_status: RSVPStatusEnum
     title: str
     date: datetime
     location: str
@@ -113,5 +114,6 @@ class GuestView(BaseModel):
 #########################
 class RSVPSubmission(BaseModel):
     attending: RSVPStatusEnum
+    group: GuestGroupEnum
     meal_preference: Optional[str] = None
     notes: Optional[str] = None

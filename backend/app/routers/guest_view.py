@@ -23,6 +23,7 @@ def guest_view(token: str, db: Session = Depends(get_db)):
     return schemas.GuestView(
         guest_name=guest.name,
         group=group,
+        rsvp_status=guest.rsvp_status,
         title=website.title,
         date=website.date,
         location=website.location,
@@ -40,6 +41,7 @@ def submit_rsvp(
 
     # Update guest RSVP info
     guest.attending = rsvp_data.attending
+    guest.group = rsvp_data.group
     guest.meal_preference = rsvp_data.meal_preference
     guest.notes = rsvp_data.notes
     guest.rsvp_status = rsvp_data.attending

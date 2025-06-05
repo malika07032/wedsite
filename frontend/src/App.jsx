@@ -5,6 +5,7 @@ import WeddingWebsitePage from "./pages/wedSite/WeddingWebsitePage";
 import GuestsPage from "./pages/guests/GuestsPage";
 import RsvpPage from "./pages/rsvp/RsvpPage";
 import DashboardPage from "./pages/DashboardPage";
+import GuestViewPage from "./pages/guestView/GuestViewPage";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/wedding" element={<WeddingWebsitePage />} />
         <Route path="/wedding/guests" element={<GuestsPage />} />
         <Route path="wedding/rsvps" element={<RsvpPage />} />
+        <Route path="guest-view/:token" element={<GuestViewPage />} />
         <Route path="/me" element={<DashboardPage />} />
         {/* You can add /dashboard and other routes later */}
       </Routes>
