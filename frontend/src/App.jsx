@@ -3,7 +3,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import WeddingWebsitePage from "./pages/wedSite/WeddingWebsitePage";
 import GuestsPage from "./pages/guests/GuestsPage";
-import RsvpPage from "./pages/rsvp/RsvpPage"
+import RsvpPage from "./pages/rsvp/RsvpPage";
 import DashboardPage from "./pages/DashboardPage";
 
 export default function App() {

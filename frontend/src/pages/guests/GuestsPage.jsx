@@ -12,7 +12,6 @@ const GuestsPage = () => {
         <h1 className="text-3xl font-bold mb-6">Manage Guests</h1>
         <GuestList onError={(msg) => setError(msg)} />
       </div>
-      
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import API from "../../api/axios";
 import GuestForm from "./GuestForm";
 
-const GuestList = ({onError}) => {
+const GuestList = ({ onError }) => {
   const [guests, setGuests] = useState([]);
   const [editingGuest, setEditingGuest] = useState(null);
 
@@ -30,7 +30,9 @@ const GuestList = ({onError}) => {
   const handleCancel = () => setEditingGuest(null);
 
   const handleDelete = async (guestId) => {
-    const confirm = window.confirm("Are you sure you want to delete this guest?");
+    const confirm = window.confirm(
+      "Are you sure you want to delete this guest?",
+    );
     if (!confirm) return;
     try {
       await API.delete(`/me/guests/${guestId}`);
